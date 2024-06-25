@@ -1,30 +1,38 @@
+//@ts-nocheck
 import React, { useState, useEffect } from "react";
 
-function LoginApp() {
+const LoginApp = () => {
   const [inputValue, setInputValue] = useState("");
   const [otpReceived, setOtpReceived] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if ("OTPCredential" in window) {
       // Start the Web OTP API flow
       const ac = new AbortController();
-      const timer = setTimeout(() => ac.abort(), 10 * 1000); // Abort after 10 seconds
+      const timeout = 30 * 1000; // Set timeout to 30 seconds
+      const timer = setTimeout(() => ac.abort(), timeout);
 
       navigator.credentials
         .get({
-          //@ts-ignore
           otp: { transport: ["sms"] },
           signal: ac.signal,
         })
-        .then((otp: any) => {
-          console.log(otp, "otp");
+        .then((otp) => {
           if (otp && otp.code) {
             setInputValue(otp.code);
             handleLogin(otp.code);
           }
         })
         .catch((err) => {
-          console.error("Error receiving OTP:", err);
+          if (err.name === "AbortError") {
+            setError("OTP retrieval timed out.");
+          } else {
+            setError("Error receiving OTP: " + err.message);
+          }
+        })
+        .finally(() => {
+          clearTimeout(timer);
         });
 
       return () => {
@@ -32,11 +40,11 @@ function LoginApp() {
         ac.abort();
       };
     } else {
-      console.warn("Web OTP API is not supported on this browser");
+      setError("Web OTP API is not supported on this browser.");
     }
   }, []);
 
-  const handleLogin = (otp: any) => {
+  const handleLogin = (otp: string) => {
     // Handle OTP verification and login logic here
     fetch("http://your-auth-server-endpoint/verify-otp", {
       method: "POST",
@@ -51,11 +59,11 @@ function LoginApp() {
           setOtpReceived(true);
           // Redirect or perform actions on successful login
         } else {
-          console.error("OTP verification failed");
+          setError("OTP verification failed.");
         }
       })
       .catch((error) => {
-        console.error("Error verifying OTP:", error);
+        setError("Error verifying OTP: " + error.message);
       });
   };
 
@@ -69,13 +77,13 @@ function LoginApp() {
             type="text"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            placeholder="Waiting for OTP..."
-            // disabled
+            placeholder="Enter OTP"
           />
+          {error && <div className="error-message">{error}</div>}
         </div>
       )}
     </div>
   );
-}
+};
 
 export default LoginApp;
