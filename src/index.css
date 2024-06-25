@@ -1,13 +1,255 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.frame {
+  align-items: flex-start;
+  background-color: var(--shadewhite);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+  padding: 16px;
+  position: relative;
+  width: 322px;
+}
+
+.frame .text-wrapper {
+  color: var(--platformprimaryprimary);
+  font-family: "Source Sans Pro-SemiBold", Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.08px;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  width: fit-content;
+}
+
+.frame .div {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  width: 100%;
+}
+
+.frame .div-2 {
+  align-items: center;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+  width: 100%;
+}
+
+.frame .div-3 {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 8px;
+  position: relative;
+}
+
+.frame .text-wrapper-2 {
+  color: var(--platformprimaryprimary-90);
+  font-family: "Source Sans Pro-SemiBold", Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.02px;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  width: fit-content;
+}
+
+.frame .divider-instance {
+  flex: 0 0 auto !important;
+  position: relative !important;
+  transform: rotate(90deg) !important;
+  width: unset !important;
+}
+
+.frame .div-4 {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 4px;
+  position: relative;
+}
+
+.frame .icons-dark-wrapper {
+  background-color: var(--platformtertiary);
+  border-radius: 9px;
+  height: 18px;
+  position: relative;
+  width: 18px;
+}
+
+.frame .icons-dark {
+  height: 13px !important;
+  left: 3px !important;
+  position: absolute !important;
+  top: 3px !important;
+  width: 13px !important;
+}
+
+.frame .telephone {
+  height: 18px;
+  position: relative;
+  width: 18px;
+}
+
+.frame .div-5 {
+  align-items: flex-start;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 8px;
+  position: relative;
+}
+
+.frame .frame-wrapper {
+  align-items: center;
+  background-color: var(--lightprimary-50);
+  border-radius: 8px;
+  display: inline-flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  overflow: hidden;
+  padding: 4px 8px;
+  position: relative;
+}
+
+.frame .img {
+  height: 16px;
+  position: relative;
+  width: 16px;
+}
+
+.frame .text-wrapper-3 {
+  color: var(--platformprimaryprimary-90);
+  font-family: "Source Sans Pro-SemiBold", Helvetica;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02px;
+  line-height: normal;
+  margin-top: -0.5px;
+  position: relative;
+  width: fit-content;
+}
+
+.frame .design-component-instance-node {
+  align-self: stretch !important;
+  position: relative !important;
+  width: 100% !important;
+}
+
+.frame .div-6 {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 8px;
+  position: relative;
+  width: 100%;
+}
+
+.frame .div-wrapper {
+  align-items: center;
+  background-color: #d0ddfc80;
+  border-radius: 8px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 16px;
+  height: 64px;
+  justify-content: center;
+  overflow: hidden;
+  padding: 10px 16px;
+  position: relative;
+}
+
+.frame .div-7 {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 2px;
+  justify-content: center;
+  position: relative;
+}
+
+.frame .div-8 {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 4px;
+  justify-content: center;
+  position: relative;
+}
+
+.frame .icons-light-time {
+  height: 14px !important;
+  position: relative !important;
+  width: 14px !important;
+}
+
+.frame .text-wrapper-4 {
+  color: #0e3476;
+  font-family: var(--platform-title-small-font-family);
+  font-size: var(--platform-title-small-font-size);
+  font-style: var(--platform-title-small-font-style);
+  font-weight: var(--platform-title-small-font-weight);
+  letter-spacing: var(--platform-title-small-letter-spacing);
+  line-height: var(--platform-title-small-line-height);
+  margin-top: -1px;
+  position: relative;
+  text-align: center;
+  width: fit-content;
+}
+
+.frame .text-wrapper-5 {
+  color: var(--lighttertiaryblue-900);
+  font-family: "Source Sans Pro-SemiBold", Helvetica;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.03px;
+  line-height: normal;
+  position: relative;
+  width: fit-content;
+}
+
+.frame .div-9 {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 2px;
+  justify-content: center;
+  margin-left: -0.5px;
+  margin-right: -0.5px;
+  position: relative;
 }
