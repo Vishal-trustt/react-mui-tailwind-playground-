@@ -42,8 +42,9 @@ const LoginApp = () => {
     } else {
       setError("Web OTP API is not supported on this browser.");
     }
+    console.log("LoginApp -> navigator.credentials", navigator.credentials);
   }, []);
-
+  console.log("running ");
   const handleLogin = (otp: string) => {
     // Handle OTP verification and login logic here
     fetch("http://your-auth-server-endpoint/verify-otp", {
