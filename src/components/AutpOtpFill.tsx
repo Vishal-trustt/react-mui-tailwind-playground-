@@ -1,4 +1,3 @@
-//@ts-nocheck
 import React, { useState, useEffect } from "react";
 
 const LoginApp = () => {
@@ -8,9 +7,8 @@ const LoginApp = () => {
 
   useEffect(() => {
     if ("OTPCredential" in window) {
-      // Start the Web OTP API flow
       const ac = new AbortController();
-      const timeout = 30 * 1000; // Set timeout to 30 seconds
+      const timeout = 30 * 1000; // 30 seconds timeout
       const timer = setTimeout(() => ac.abort(), timeout);
 
       navigator.credentials
@@ -20,8 +18,14 @@ const LoginApp = () => {
         })
         .then((otp) => {
           if (otp && otp.code) {
-            setInputValue(otp.code);
-            handleLogin(otp.code);
+            // Extract OTP from the message
+            const extractedOtp = extractOtpFromMessage(otp.code);
+            if (extractedOtp) {
+              setInputValue(extractedOtp);
+              handleLogin(extractedOtp);
+            } else {
+              setError("Failed to extract OTP from message.");
+            }
           }
         })
         .catch((err) => {
@@ -42,9 +46,14 @@ const LoginApp = () => {
     } else {
       setError("Web OTP API is not supported on this browser.");
     }
-    console.log("LoginApp -> navigator.credentials", navigator.credentials);
   }, []);
-  console.log("running ");
+
+  const extractOtpFromMessage = (message: string): string | null => {
+    // Regular expression to find 6-digit numbers in the message
+    const otpMatch = message.match(/\b\d{6}\b/);
+    return otpMatch ? otpMatch[0] : null;
+  };
+
   const handleLogin = (otp: string) => {
     // Handle OTP verification and login logic here
     fetch("http://your-auth-server-endpoint/verify-otp", {
