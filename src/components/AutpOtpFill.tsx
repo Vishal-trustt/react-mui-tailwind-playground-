@@ -18,10 +18,10 @@ const LoginApp = () => {
           signal: ac.signal,
         })
         .then((otp) => {
-          console.log("OTP received before if:", otp);
+          alert("OTP received before if:", otp);
           if (otp && otp.code) {
             // Extract OTP from the message
-            console.log("OTP received after if :", otp.code, code);
+            alert("OTP received after if :", otp.code, code);
             const extractedOtp = extractOtpFromMessage(otp);
             if (extractedOtp) {
               setInputValue(extractedOtp);
