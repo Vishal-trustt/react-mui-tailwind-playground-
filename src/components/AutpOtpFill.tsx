@@ -22,7 +22,7 @@ const LoginApp = () => {
           if (otp && otp.code) {
             // Extract OTP from the message
             console.log("OTP received after if :", otp.code, code);
-            const extractedOtp = extractOtpFromMessage(otp.code);
+            const extractedOtp = extractOtpFromMessage(otp);
             if (extractedOtp) {
               setInputValue(extractedOtp);
               handleLogin(extractedOtp);
