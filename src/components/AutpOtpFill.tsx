@@ -7,21 +7,22 @@ const LoginApp = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    console.log("hittong use effect");
     if ("OTPCredential" in window) {
       const ac = new AbortController();
       const timeout = 30 * 1000; // 30 seconds timeout
       const timer = setTimeout(() => ac.abort(), timeout);
-
+      console.log("under OTP cred if condition");
       navigator.credentials
         .get({
           otp: { transport: ["sms"] },
           signal: ac.signal,
         })
         .then((otp) => {
-          alert("OTP received before if:", otp);
+          console.log("OTP received before if:", otp);
           if (otp && otp.code) {
             // Extract OTP from the message
-            alert("OTP received after if :", otp.code, code);
+            console.log("OTP received after if :", otp.code, code);
             const extractedOtp = extractOtpFromMessage(otp);
             if (extractedOtp) {
               setInputValue(extractedOtp);
@@ -50,6 +51,7 @@ const LoginApp = () => {
       setError("Web OTP API is not supported on this browser.");
     }
   }, []);
+  console.log("app is running");
 
   const extractOtpFromMessage = (message: string): string | null => {
     // Regular expression to find 6-digit numbers in the message
